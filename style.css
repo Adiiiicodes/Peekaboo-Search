@@ -1,10 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
-    --primary-color: #FF8C00;
-    --bg-color: #000;
-    --border-glow: 0 0 15px rgba(255, 140, 0, 0.3);
-    --container-bg: rgba(10, 10, 10, 0.9);
+    --primary-color: #2563eb;
+    --bg-color: #0f172a;
+    --border-glow: 0 0 15px rgba(37, 99, 235, 0.2);
+    --container-bg: rgba(30, 41, 59, 0.9);
+    --accent: #0ea5e9;
+    --text: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --gradient-start: #1e293b;
+    --gradient-end: #0f172a;
 }
 
 * {
@@ -14,14 +19,10 @@
 }
 
 body {
-    font-family: 'VT323', 'Courier New', monospace;
-    background-color: #000;
-    background-image: url('images/BG.png');
-    background-size: 800px 449px;
-    background-repeat: repeat;
-    background-attachment: scroll;
-    background-position: top left;
-    color: #FF8C00;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    background-image: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    color: var(--text);
     display: flex;
     flex-direction: column;
     padding: 20px;
@@ -33,18 +34,23 @@ body {
 .container {
     max-width: 100%;
     margin: 0 auto;
-    background-color: var(--container-bg);
-    border: 2px solid var(--primary-color);
-    border-radius: 15px;
+    background-color: rgba(30, 41, 59, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
     padding: 20px;
     box-shadow: var(--border-glow);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 }
 
 h1 {
     text-align: center;
     font-size: 3em;
     margin-bottom: 25px;
-    text-shadow: 0 0 15px rgba(255, 140, 0, 0.7);
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--text), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 /* Search Section Styles */
@@ -58,29 +64,32 @@ h1 {
 input[type="text"] {
     width: 100%;
     padding: 15px;
-    background-color: var(--bg-color);
-    color: var(--primary-color);
-    border: 2px solid var(--primary-color);
-    border-radius: 8px;
+    background-color: rgba(30, 41, 59, 0.4);
+    color: var(--text);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
     font-family: inherit;
     font-size: 1.1em;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 }
 
 button {
     padding: 12px 20px;
-    background-color: var(--primary-color);
-    color: var(--bg-color);
+    background: linear-gradient(135deg, var(--primary-color), var(--accent));
+    color: var(--text);
     border: none;
-    border-radius: 8px;
+    border-radius: 12px;
     cursor: pointer;
     font-family: inherit;
     font-size: 1.1em;
     transition: all 0.3s ease;
+    font-weight: 500;
 }
 
 button:hover {
-    background-color: #FFA500;
-    box-shadow: 0 0 10px rgba(255, 140, 0, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(37, 99, 235, 0.4);
 }
 
 /* Checkbox Styles */
@@ -90,6 +99,7 @@ button:hover {
     gap: 10px;
     font-size: 1.1em;
     cursor: pointer;
+    color: var(--text-secondary);
 }
 
 .checkbox-container input {
@@ -99,10 +109,11 @@ button:hover {
 .checkmark {
     width: 24px;
     height: 24px;
-    border: 2px solid var(--primary-color);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     display: inline-block;
     position: relative;
-    border-radius: 5px;
+    border-radius: 8px;
+    background-color: rgba(30, 41, 59, 0.4);
 }
 
 .checkbox-container input:checked + .checkmark:after {
@@ -111,7 +122,7 @@ button:hover {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: var(--primary-color);
+    color: var(--accent);
     font-size: 1.2em;
 }
 
@@ -126,19 +137,20 @@ button:hover {
 .question {
     font-size: 1em;
     padding: 8px 15px;
-    background-color: var(--container-bg);
-    border: 2px solid var(--primary-color);
-    border-radius: 8px;
+    background-color: rgba(30, 41, 59, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
     cursor: pointer;
     transition: all 0.3s ease;
     text-align: center;
+    color: var(--text-secondary);
 }
 
 .question:hover {
     background-color: var(--primary-color);
-    color: var(--bg-color);
+    color: var(--text);
     transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(255, 140, 0, 0.3);
+    box-shadow: 0 8px 30px rgba(37, 99, 235, 0.4);
 }
 
 /* Common Container Styles */
@@ -148,12 +160,14 @@ button:hover {
 .summary-container,
 .graph-section,
 .media-section {
-    background-color: var(--container-bg);
-    border: 2px solid var(--primary-color);
-    border-radius: 15px;
+    background-color: rgba(30, 41, 59, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
     padding: 20px;
     margin: 25px 0;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 }
 
 /* Hover effects for containers */
@@ -163,15 +177,17 @@ button:hover {
 .graph-section:hover,
 .media-section:hover {
     transform: translateY(-3px);
-    box-shadow: 0 5px 20px rgba(255, 140, 0, 0.4);
+    box-shadow: 0 8px 30px rgba(37, 99, 235, 0.2);
 }
 
 /* Common Header Styles */
 h3 {
     margin-bottom: 20px;
     font-size: 1.5em;
-    border-bottom: 2px solid var(--primary-color);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     padding-bottom: 10px;
+    color: var(--text);
+    font-weight: 600;
 }
 
 /* Images Section Styles */
@@ -186,32 +202,32 @@ h3 {
 
 .images-scroll::-webkit-scrollbar,
 .images-gallery::-webkit-scrollbar {
-    height: 10px;
+    height: 8px;
 }
 
 .images-scroll::-webkit-scrollbar-track,
 .images-gallery::-webkit-scrollbar-track {
-    background: var(--bg-color);
-    border-radius: 5px;
+    background: rgba(30, 41, 59, 0.4);
+    border-radius: 4px;
 }
 
 .images-scroll::-webkit-scrollbar-thumb,
 .images-gallery::-webkit-scrollbar-thumb {
     background: var(--primary-color);
-    border-radius: 5px;
+    border-radius: 4px;
 }
 
 .image-item {
     flex: 0 0 auto;
-    border: 2px solid var(--primary-color);
-    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .image-item:hover {
     transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(255, 140, 0, 0.3);
+    box-shadow: 0 8px 30px rgba(37, 99, 235, 0.3);
 }
 
 .image-item img {
@@ -224,9 +240,9 @@ h3 {
 #trendChart {
     width: 100%;
     min-height: 300px;
-    background-color: rgba(0, 0, 0, 0.3);
-    border: 1px solid var(--primary-color);
-    border-radius: 8px;
+    background-color: rgba(30, 41, 59, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
     padding: 15px;
 }
 
@@ -239,10 +255,10 @@ h3 {
 }
 
 .video-item {
-    border: 2px solid var(--primary-color);
-    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
     overflow: hidden;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(30, 41, 59, 0.4);
 }
 
 .video-container {
@@ -260,55 +276,33 @@ h3 {
     height: 100%;
     border: none;
 }
-/* General container styles */
-#googleResults {
-    max-width: 100%; /* Ensure the container doesn't exceed its parent width */
-    overflow: hidden; /* Prevent data from overflowing */
-    padding: 10px; /* Add some spacing */
-    border: 1px solid #ccc; /* Add a border for better visibility */
-    border-radius: 5px;
-    background-color: #ffffff; /* Add background color */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Slight shadow for aesthetics */
-}
 
-/* Table container to make it scrollable */
+/* Results Table Styles */
 .results-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
-    overflow-x: auto; /* Allow horizontal scrolling if table is too wide */
-    display: block; /* Ensure table scrolls inside the container */
+    overflow-x: auto;
+    display: block;
 }
 
-/* Table headers and rows */
 .results-table th,
 .results-table td {
-    border: 1px solid #000000;
+    border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 10px;
     text-align: left;
-    word-wrap: break-word; /* Prevent long words from breaking layout */
+    color: var(--text-secondary);
 }
 
 .results-table th {
-    background-color: #000000;
-}
-
-/* Pre-formatted summary block */
-.structured-summary {
-    background: #000000;
-    padding: 15px;
-    border-radius: 5px;
-    font-family: monospace;
-    white-space: pre-wrap;
-    word-wrap: break-word; /* Wrap long lines */
-    overflow-y: auto; /* Allow vertical scrolling if content is too long */
-    max-height: 300px; /* Limit height to prevent component overflow */
+    background-color: rgba(30, 41, 59, 0.6);
+    color: var(--text);
 }
 
 /* News Results Styles */
 .news-result {
     padding: 15px;
-    border-bottom: 1px solid rgba(255, 140, 0, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .news-result:last-child {
@@ -317,24 +311,18 @@ h3 {
 
 .news-result h4 {
     margin-bottom: 10px;
+    color: var(--text);
 }
 
 .news-result a {
-    color: var(--primary-color);
+    color: var(--accent);
     text-decoration: none;
     font-size: 1.2em;
+    transition: all 0.3s ease;
 }
 
 .news-result a:hover {
-    text-shadow: 0 0 8px rgba(255, 140, 0, 0.5);
-}
-
-/* Sentiment Analysis Styles */
-.sentiment-chart {
-    padding: 15px;
-    background-color: rgba(0, 0, 0, 0.3);
-    border-radius: 8px;
-    margin-top: 15px;
+    color: var(--primary-color);
 }
 
 /* Footer Styles */
@@ -343,7 +331,8 @@ footer {
     margin-top: 30px;
     padding: 15px;
     font-size: 1em;
-    border-top: 2px solid rgba(255, 140, 0, 0.3);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
 }
 
 /* Utility Classes */
@@ -352,13 +341,14 @@ footer {
     padding: 25px;
     font-style: italic;
     font-size: 1.2em;
+    color: var(--text-secondary);
 }
 
 .error {
-    color: #ff4444;
+    color: #f87171;
     padding: 15px;
-    border: 2px solid #ff4444;
-    border-radius: 8px;
+    border: 1px solid #f87171;
+    border-radius: 12px;
     margin: 15px 0;
     font-size: 1.1em;
 }
