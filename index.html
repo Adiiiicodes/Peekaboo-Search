@@ -3,82 +3,271 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PeeKaboo? - Enhanced Search</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="Config/config.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="script.js" defer></script>
+    <title>ART Finder - Automated Research & Trigger Finder</title>
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.59/build/spline-viewer.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/inter/3.19.3/inter.css" rel="stylesheet">
+    <style>
+        /* Color Variables */
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --background: #0f172a;
+            --card-bg: #1e293b;
+            --text: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --accent: #0ea5e9;
+            --gradient-start: #1e293b;
+            --gradient-end: #0f172a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color:#1e293b ;
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            background-color: rgba(30, 41, 59, 0.8);
+            padding: 1.25rem 5%;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .navbar h2 {
+            color: var(--text);
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 5% 10%;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            position: relative;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 600px;
+            margin-top: 60px;
+            z-index: 1;
+            padding: 3rem;
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .spline-container {
+            position: absolute;
+            right: 0;
+            left: 200;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50vw;
+            height: 100vh;
+            z-index: 2;
+        }
+
+        spline-viewer {
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, var(--text), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            line-height: 1.8;
+        }
+
+        .features {
+            padding: 8rem 10%;
+            background-color: var(--gradient-start);
+            color: var(--text);
+            position: relative;
+            z-index: 3;
+        }
+
+        .features h2 {
+            text-align: center;
+            margin-bottom: 4rem;
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: var(--text);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: rgba(30, 41, 59, 0.4);
+            padding: 2.5rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .feature-card h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .cta {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: var(--text);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        .cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(37, 99, 235, 0.4);
+        }
+
+        @media (max-width: 1024px) {
+            .hero {
+                flex-direction: column;
+                padding-top: 100px;
+                height: auto;
+            }
+
+            .hero-content {
+                max-width: 100%;
+                margin-bottom: 2rem;
+            }
+
+            .spline-container {
+                position: relative;
+                width: 100%;
+                height: 50vh;
+                transform: none;
+                top: auto;
+                margin-top: 2rem;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .spline-container {
+                height: 40vh;
+            }
+
+            .hero-content {
+                padding: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    
-        <h1>PeeKaboo?</h1>
-        
-        <!-- Search Section -->
-        <div class="search-wrapper">
-            <form id="searchForm">
-                <div class="search-container">
-                    <input type="text" id="searchInput" name="q" placeholder="Enter your query..." required>
-                    <button type="submit"><i class="fas fa-search"></i></button>
-                </div>
-                <div class="control-group">
-                    <label class="checkbox-container">
-                        <input type="checkbox" id="showImagesCheckbox" checked>
-                        <span class="checkmark"></span>
-                        <span>Show Images</span>
-                    </label>
-                </div>
-                <div class="suggestions">
-                    <span class="question">Global climate change impact</span>
-                    <span class="question">AI advancements in healthcare</span>
-                    <span class="question">Space exploration milestones</span>
-                    <span class="question">Emerging infectious diseases</span>
-                </div>
-            </form>
-        </div>
+    <nav class="navbar">
+        <h2>ART Finder</h2>
+    </nav>
 
-        <!-- Results Sections -->
-        <div class="images-container" id="imagesContainer">
-            <h3>Image Results</h3>
-            <div class="images-scroll"></div>
-        </div>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Automated Research &amp; Trigger Finder</h1>
+            <p>Streamline your ad creation process with AI-powered research and competitor analysis</p>
+            <a class="cta" href="index.html">Get Started Now</a>
 
-        <div id="googleResults" class="results-section">
-            <h3>Google Analysis</h3>
         </div>
-
-        <div id="redditResults" class="results-section">
-            <h3>Reddit Insights</h3>
+        <div class="spline-container">
+            <spline-viewer url="https://prod.spline.design/w3-e1b5LXTqDriPe/scene.splinecode"></spline-viewer>
         </div>
+    </section>
 
-        <div id="youtubeAnalysis" class="results-section">
-            <h3>YouTube Analysis</h3>
-            <div class="video-container"></div>
+    <section class="features">
+        <h2>Key Features</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>Comprehensive Research Automation</h3>
+                <p>Automatically gather insights from multiple platforms including Google, YouTube, Reddit, and Quora</p>
+            </div>
+            <div class="feature-card">
+                <h3>Actionable Insights Generation</h3>
+                <p>Get detailed analysis of user pain points, triggers, and effective solutions for your target audience</p>
+            </div>
+            <div class="feature-card">
+                <h3>Reference Dashboard</h3>
+                <p>Access a curated collection of competitor ads and visualization tools for better decision making</p>
+            </div>
+            <div class="feature-card">
+                <h3>User-Centric Interface</h3>
+                <p>Simple and intuitive dashboard that puts all the important insights at your fingertips</p>
+            </div>
         </div>
-
-        <div id="trendGraph" class="graph-section">
-            <h3>Trend Analysis</h3>
-            <canvas id="trendChart"></canvas>
-        </div>
-
-        <div id="sentimentAnalysis" class="results-section">
-            <h3>Sentiment Analysis</h3>
-        </div>
-
-        <div id="newsResults" class="results-section">
-            <h3>News Results</h3>
-        </div>
-
-        <div id="summary" class="summary-container">
-            <h3>Summary</h3>
-        </div>
-
-        <div id="mediaGallery" class="media-section">
-            <h3>Media Gallery</h3>
-            <div class="videos-container"></div>
-            <div class="images-gallery"></div>
-        </div>
-
-        <footer>&copy; 2024 PeeKaboo | Powered by Illuminati</footer>
-    
+    </section>
 </body>
 </html>
