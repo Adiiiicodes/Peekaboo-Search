@@ -144,5 +144,5 @@ Contributions are welcome! If you'd like to improve the project:
 ---
 
 ## Contact
-For queries or feedback, please reach out to [support@advanceapp.com](mailto:support@advanceapp.com).
+For queries or feedback, please reach out to Om Laudu.
 
